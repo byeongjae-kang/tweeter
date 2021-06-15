@@ -1,0 +1,18 @@
+form {
+  font-family: "Courc";
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-around;
+}
+
+form > div {
+  display: inherit;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  
+}
+
+div button {
+  background-color: #4056A1;
+  color: #FFFFFF;
+}
