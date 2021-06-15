@@ -21,6 +21,12 @@ body {
   font-size: 24px;
 }
 
+main {
+  width: 90%;
+  margin: auto;
+  background-color: inherit;
+}
+
 /*
  * Additional CSS can be defined below or in other CSS files, as per instructions
  */
