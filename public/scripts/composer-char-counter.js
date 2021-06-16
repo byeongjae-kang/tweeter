@@ -5,9 +5,9 @@ $(document).ready(function() {
 $("#tweet-text").keydown(function() {
   const textLength = (140 - $(this).val().length);
   if (textLength < 0) {
-    $('output').removeClass("counter").html(textLength);
+    $('.counter').addClass("red").html(textLength);
   } else {
-    $('output').addClass("counter").html(textLength);
+    $('.counter').removeClass("red").html(textLength);
   }
 });
 
