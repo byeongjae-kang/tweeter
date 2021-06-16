@@ -1,4 +1,4 @@
-header {
+body > header {
   height: 400px;
   width: 100%;
   display: flex;
@@ -7,4 +7,5 @@ header {
   align-items: center;
   background-color: #dbc84b;
   background-image: url("https://www.transparenttextures.com/patterns/arabesque.png");
+  margin-top: 120px;
 }
