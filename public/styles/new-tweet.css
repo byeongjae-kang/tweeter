@@ -1,11 +1,24 @@
 form {
-  font-family: "Courc";
   display: flex;
   flex-flow: column wrap;
   justify-content: space-around;
+  font-size: 30pt;
+  font-weight: bold;
+}
+
+form > textarea {
+  margin: 0.5em 0 0.5em 0;
+  resize: none;
+  border: none;
+  outline:none;
+  border-bottom: 5px black solid;
+  font-size: 20pt;
+  font-weight: inherit;
+  background-color: inherit;
 }
 
 form > div {
+  font-family: 'Bungee', cursive;
   display: inherit;
   flex-flow: row wrap;
   justify-content: space-between;
