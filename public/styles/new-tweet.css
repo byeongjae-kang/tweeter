@@ -29,3 +29,11 @@ div button {
   background-color: #4056A1;
   color: #FFFFFF;
 }
+
+output.counter {
+  color: black;
+}
+
+output {
+  color: red;
+}
