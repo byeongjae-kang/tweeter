@@ -52,7 +52,7 @@
       </section>
       <section>
         <article class='tweet'>
-          <header>
+          <header class="tweet-content">
             <div>
               <img src="https://i.imgur.com/nlhLi3I.png">
               <p>name</p>
@@ -61,12 +61,12 @@
               <p class='opacity'>@email</p>
             </div>
           </header>
-          <div>
-            <output name="text-output" class="text-output" for="tweet-text">Hello my name is Byeongjae</output>
+          <div class="tweet-message">
+            <p name="text-output" class="text-output" for="tweet-text">Hello my name is Byeongjae</p>
           </div>
-          <footer>
+          <footer class="tweet-content">
             <div>
-              <p>10 days ago</p>
+              <time class="timeago" datetime="2021-06-16T09:24:17Z"></time>
             </div>
             <div>
               <i class="fas fa-flag"></i>
@@ -83,7 +83,7 @@
     <!-- External JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/timeago.js/4.0.2/timeago.min.js" integrity="sha512-SVDh1zH5N9ChofSlNAK43lcNS7lWze6DTVx1JCXH1Tmno+0/1jMpdbR8YDgDUfcUrPp1xyE53G42GFrcM0CMVg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
+   
     <!-- App JS -->
     <script type="text/javascript" src="/scripts/client.js"></script>
     <script type="text/javascript" src="/scripts/composer-char-counter.js"></script>
