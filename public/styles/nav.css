@@ -10,7 +10,8 @@ nav {
   justify-content: space-between;
   align-items: center;
   padding: 0.2em 1.5em 0 1.5em;
-  position: relative;
+  position: fixed;
+  top: 0px;
 }
 
 nav span {
