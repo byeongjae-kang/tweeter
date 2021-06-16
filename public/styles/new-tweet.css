@@ -10,7 +10,7 @@ form > textarea {
   margin: 0.5em 0 0.5em 0;
   resize: none;
   border: none;
-  outline:none;
+  outline: none;
   border-bottom: 5px black solid;
   font-size: 20pt;
   font-weight: inherit;
@@ -30,10 +30,47 @@ div button {
   color: #FFFFFF;
 }
 
-output.counter {
-  color: black;
+.red {
+  color: red;
 }
 
-output {
-  color: red;
+article.tweet {
+  border: solid 5px black;
+  margin: 100px 0 100px 0;
+}
+
+article.tweet * {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin: 15px
+}
+
+article.tweet > div {
+  border-bottom: solid 5px black;
+  padding: 0 20px 80px 20px;
+}
+
+article.tweet footer {
+  font-size: 20pt;
+  margin: 0;
+}
+
+article.tweet * div {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.opacity {
+  opacity: 0.5;
+}
+
+.tweet:hover {
+  box-shadow: 5px 10px 8px  #ffcc00;
+}
+.fas:hover {
+  color: #ffcc00;;
 }
