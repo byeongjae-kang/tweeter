@@ -15,11 +15,6 @@
     <link rel="stylesheet" href="/styles/header.css" type="text/css" />
     <link rel="stylesheet" href="/styles/new-tweet.css" type="text/css" />
 
-    <!-- External JS -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-    <!-- App JS -->
-    <script type="text/javascript" src="/scripts/client.js"></script>
   </head>
   <body>
     <!-- Top nav bar (fixed) -->
@@ -31,6 +26,7 @@
         <i class="fas fa-angle-double-down"></i>
       </p> 
     </nav>
+    <!-- header username profile img -->
     <header>
       <div>
         <img src="/images/profile-hex.png"> 
@@ -44,6 +40,7 @@
     <main class="container">
       <section class="new-tweet">
         <h2>Compose Tweet</h2>
+        <!-- form to submit tweet -->
         <form action="/tweets" method='POST'>
           <label for="tweet-text">What are you humming about?</label>
           <textarea name="text" id="tweet-text"></textarea>
@@ -58,5 +55,12 @@
       <h2>temporary</h2>
       <p>temporary</p>
     </main>
+
+    <!-- External JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- App JS -->
+    <script type="text/javascript" src="/scripts/client.js"></script>
+    <script type="text/javascript" src="/scripts/composer-char-counter.js"></script>
   </body>
 </html>
