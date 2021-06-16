@@ -9,7 +9,9 @@ html {
 *, *:before, *:after {
   box-sizing: inherit;
 }
-
+img {
+  object-fit: contain;
+}
 /*
  * Global layout stuff
  */
