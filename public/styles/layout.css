@@ -25,47 +25,9 @@ main {
   width: 90%;
   margin: auto;
   background-color: inherit;
+  font-size: 30pt;
 }
 
-article.tweet {
-  border: solid 5px black;
-  margin: 100px 0 100px 0;
-  padding: 30px;
-}
-article.tweet header {
-  display: flex;
-  flex-flow: row;
-  justify-content: space-between;  
-}
-
-.opacity {
-  opacity: 0.5;
-}
-
-article.tweet footer {
-  display: flex;
-  flex-flow: row;
-  justify-content: space-between;  
-  border-top: black 5px solid;
-}
-
-article.tweet footer div {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  
-}
-
-article.tweet footer div i {
-  margin: 10px;
-}
-
-.tweet:hover {
-  box-shadow: 5px 10px 8px  #ffcc00;
-}
-.fas:hover {
-  color: #ffcc00;;
-}
 /*
  * Additional CSS can be defined below or in other CSS files, as per instructions
  */
