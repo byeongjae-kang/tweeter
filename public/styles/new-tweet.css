@@ -1,3 +1,14 @@
+.validation {
+  display: flex;
+  flex-flow: row;
+  border: solid 5px red;
+  color: red;
+  justify-content: space-around;
+  align-items: center;
+  margin: 2em;
+  font-size: 1.2em;
+}
+
 form {
   display: flex;
   flex-flow: column wrap;
@@ -63,6 +74,7 @@ article.tweet .tweet-content {
 .tweet-message {
   border-bottom: black 5px solid;
   padding: 0em 1em 0em 1em;
+  word-wrap: break-word;
 }
 
 .tweet-message p {
