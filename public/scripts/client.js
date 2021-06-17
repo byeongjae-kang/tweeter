@@ -28,18 +28,35 @@ $(document).ready(() => {
     event.preventDefault();
     const $serialized = $(this).serialize();
     const $text = $('#tweet-text').val();
-    if ($text.Length < 1 || $text === null) {
-      return alert("Please write what you are humming about!!");
+    const $tweetValidation = $('.new-tweet');
+    const $validation = $(`<div class="validation">
+          <i class="fas fa-bomb"></i>
+          <p></p>
+          <i class="fas fa-bomb"></i>
+        </div>`);
+
+    
+    if ($text.length < 1 || !$text) {
+      const errorMessage = "Please write what you are humming about!!";
+      $tweetValidation.prepend($validation);
+      $(".validation p").text(errorMessage);
+      return 
     }
-    if ($text.Length > 140) {
-      return alert("maximum number of text is 140!!");
+    if ($text.length > 140) {
+      const errorMessage = "maximum number of text is 140!!";
+      $tweetValidation.prepend($validation);
+      $(".validation p").text(errorMessage);
+      return 
     }
+    $('.validation').remove();
+
     $.post("/tweets", $serialized)
       .then(() => {
         loadTweets();
+        $('textarea').val('');
       })
       .catch((error) => {
-        console.error("error");
+        console.error(error);
       });
   });
 
@@ -57,11 +74,11 @@ $(document).ready(() => {
 
 
 
-  const escape = function (str) {
-    let div = document.createElement("div");
-    div.appendChild(document.createTextNode(str));
-    return div.innerHTML;
-  };
+  // const  = function (str) {
+    // let div = document.createElement("div");
+    // div.appendChild(document.createTextNode(str));
+    // return div.innerHTML;
+  // };
 
 
   
@@ -70,24 +87,23 @@ $(document).ready(() => {
     const { text } = tweet.content;
     const time = tweet.created_at;
     const newTime = timeago.format(time);
-
     const $tweet = $(` 
     <article class='tweet'>
       <header class="tweet-content">
         <div>
-          <img src=${escape(avatars)}>
-          <p>${escape(name)}</p>
+          <img src=${(avatars)}>
+          <p>${(name)}</p>
         </div>
         <div>
-          <p class='opacity'>${escape(handle)}</p>
+          <p class='opacity'>${(handle)}</p>
         </div>
       </header>
       <div class="tweet-message">
-        <p name="text-output" class="text-output" for="tweet-text">${escape(text)}</p>
+        <p name="text-output" class="text-output" for="tweet-text">${(text)}</p>
       </div>
       <footer class="tweet-content">
         <div>
-          <time class="timeago">${escape(newTime)}</time>
+          <time class="timeago">${(newTime)}</time>
         </div>
         <div>
           <i class="fas fa-flag"></i>
