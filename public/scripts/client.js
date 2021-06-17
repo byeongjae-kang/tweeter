@@ -23,7 +23,15 @@ $(document).ready(() => {
 
   $('form').submit(function(event) {
     event.preventDefault();
-    const serialized = $(this).serialize();
+    const $serialized = $(this).serialize();
+    const $textLength = $('#tweet-text').val().length;
+    if ($textLength < 1) {
+      return alert("Please write what you are humming about!!");
+    }
+    if ($textLength > 140) {
+      return alert("maximum number of text is 140!!");
+    }
+    
   });
 
   const renderTweets = function(tweets) {
