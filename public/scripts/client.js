@@ -6,7 +6,6 @@
 $(document).ready(() => {
 
 
-
   const loadTweets = function() {
     $.ajax({
       url: "/tweets",
@@ -23,31 +22,31 @@ $(document).ready(() => {
   loadTweets();
 
 
-
   $('form').submit(function(event) {
     event.preventDefault();
     const $serialized = $(this).serialize();
-    const $text = $('#tweet-text').val();
+    const $text = $('#tweet-text').val().trim();
     const $tweetValidation = $('.new-tweet');
     const $validation = $(`<div class="validation">
           <i class="fas fa-bomb"></i>
-          <p></p>
+          <p id="error-text"></p>
           <i class="fas fa-bomb"></i>
         </div>`);
+    let errorMessage = '';
 
+    if ($text.length < 1 ) {
+      errorMessage = "Please write what you are humming about!!";
+    } else if ($text.length > 140) {
+      errorMessage = "maximum number of text is 140!!";
+    }
     
-    if ($text.length < 1 || !$text) {
-      const errorMessage = "Please write what you are humming about!!";
+    if (errorMessage) {
+      $('.validation').remove();
       $tweetValidation.prepend($validation);
       $(".validation p").text(errorMessage);
-      return 
+      return;
     }
-    if ($text.length > 140) {
-      const errorMessage = "maximum number of text is 140!!";
-      $tweetValidation.prepend($validation);
-      $(".validation p").text(errorMessage);
-      return 
-    }
+
     $('.validation').remove();
 
     $.post("/tweets", $serialized)
@@ -59,7 +58,6 @@ $(document).ready(() => {
         console.error(error);
       });
   });
-
 
 
   const renderTweets = function(tweets) {
@@ -74,11 +72,11 @@ $(document).ready(() => {
 
 
 
-  // const  = function (str) {
-    // let div = document.createElement("div");
-    // div.appendChild(document.createTextNode(str));
-    // return div.innerHTML;
-  // };
+  const escape = function (str) {
+    let div = document.createElement("div");
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
+  };
 
 
   
@@ -91,19 +89,19 @@ $(document).ready(() => {
     <article class='tweet'>
       <header class="tweet-content">
         <div>
-          <img src=${(avatars)}>
-          <p>${(name)}</p>
+          <img src=${escape(avatars)}>
+          <p>${escape(name)}</p>
         </div>
         <div>
-          <p class='opacity'>${(handle)}</p>
+          <p class='opacity'>${escape(handle)}</p>
         </div>
       </header>
       <div class="tweet-message">
-        <p name="text-output" class="text-output" for="tweet-text">${(text)}</p>
+        <p name="text-output" class="text-output" for="tweet-text">${escape(text)}</p>
       </div>
       <footer class="tweet-content">
         <div>
-          <time class="timeago">${(newTime)}</time>
+          <time class="timeago">${escape(newTime)}</time>
         </div>
         <div>
           <i class="fas fa-flag"></i>
