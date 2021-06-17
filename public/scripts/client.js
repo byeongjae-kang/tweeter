@@ -4,6 +4,9 @@
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
 $(document).ready(() => {
+
+
+
   const loadTweets = function() {
     $.ajax({
       url: "/tweets",
@@ -11,36 +14,57 @@ $(document).ready(() => {
       dataType: 'json'
     })
     .then((posts) => {
-      console.log(posts);
       renderTweets(posts);
     })
     .catch((error) => {
       console.error(error);
     })
   }
-  
   loadTweets();
+
+
 
   $('form').submit(function(event) {
     event.preventDefault();
     const $serialized = $(this).serialize();
-    const $textLength = $('#tweet-text').val().length;
-    if ($textLength < 1) {
+    const $text = $('#tweet-text').val();
+    if ($text.Length < 1 || $text === null) {
       return alert("Please write what you are humming about!!");
     }
-    if ($textLength > 140) {
+    if ($text.Length > 140) {
       return alert("maximum number of text is 140!!");
     }
-    
+    $.post("/tweets", $serialized)
+      .then(() => {
+        loadTweets();
+      })
+      .catch((error) => {
+        console.error("error");
+      });
   });
 
+
+
   const renderTweets = function(tweets) {
+    const $tweets = $('#tweets-container');
+    $tweets.empty();
+    
     for (const tweet of tweets) {
       const $tweet = createTweetElement(tweet);
-      $('#tweets-container').append($tweet);
+      $('#tweets-container').prepend($tweet);
     }
   }
 
+
+
+  const escape = function (str) {
+    let div = document.createElement("div");
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
+  };
+
+
+  
   const createTweetElement = function(tweet) {
     const { name, avatars, handle } = tweet.user;
     const { text } = tweet.content;
@@ -51,19 +75,19 @@ $(document).ready(() => {
     <article class='tweet'>
       <header class="tweet-content">
         <div>
-          <img src=${avatars}>
-          <p>${name}</p>
+          <img src=${escape(avatars)}>
+          <p>${escape(name)}</p>
         </div>
         <div>
-          <p class='opacity'>${handle}</p>
+          <p class='opacity'>${escape(handle)}</p>
         </div>
       </header>
       <div class="tweet-message">
-        <p name="text-output" class="text-output" for="tweet-text">${text}</p>
+        <p name="text-output" class="text-output" for="tweet-text">${escape(text)}</p>
       </div>
       <footer class="tweet-content">
         <div>
-          <time class="timeago">${newTime}</time>
+          <time class="timeago">${escape(newTime)}</time>
         </div>
         <div>
           <i class="fas fa-flag"></i>
