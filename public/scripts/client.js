@@ -3,81 +3,88 @@
  * jQuery is already loaded
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
+$(document).ready(() => {
 
-const data = [
-  {
-    "user": {
-      "name": "Newton",
-      "avatars": "https://i.imgur.com/73hZDYK.png"
-      ,
-      "handle": "@SirIsaac"
+
+  $('form').submit(function(event) {
+    event.preventDefault();
+    const serialized = $(this).serialize();
+  });
+
+
+  const data = [
+    {
+      "user": {
+        "name": "Newton",
+        "avatars": "https://i.imgur.com/73hZDYK.png"
+        ,
+        "handle": "@SirIsaac"
+      },
+      "content": {
+        "text": "If I have seen further it is by standing on the shoulders of giants"
+      },
+      "created_at": 1165116237227
     },
-    "content": {
-      "text": "If I have seen further it is by standing on the shoulders of giants"
-    },
-    "created_at": 1165116237227
-  },
-  {
-    "user": {
-      "name": "Descartes",
-      "avatars": "https://i.imgur.com/nlhLi3I.png",
-      "handle": "@rd" },
-    "content": {
-      "text": "Je pense , donc je suis"
-    },
-    "created_at": 1461113959088
+    {
+      "user": {
+        "name": "Descartes",
+        "avatars": "https://i.imgur.com/nlhLi3I.png",
+        "handle": "@rd" },
+      "content": {
+        "text": "Je pense , donc je suis"
+      },
+      "created_at": 1461113959088
+    }
+  ]
+
+  const renderTweets = function(tweets) {
+    for (const tweet of tweets) {
+      const $tweet = createTweetElement(tweet);
+      $('#tweets-container').append($tweet);
+    }
   }
-]
 
-const renderTweets = function(tweets) {
-  for (const tweet of tweets) {
-    const $tweet = createTweetElement(tweet);
-    $('#tweets-container').append($tweet);
+
+  const createTweetElement = function(tweet) {
+    const { name, avatars, handle } = tweet.user;
+    const { text } = tweet.content;
+    const time = tweet.created_at;
+    const newTime = timeago.format(time);
+
+    const $tweet = $(` 
+    <article class='tweet'>
+      <header class="tweet-content">
+        <div>
+          <img src=${avatars}>
+          <p>${name}</p>
+        </div>
+        <div>
+          <p class='opacity'>${handle}</p>
+        </div>
+      </header>
+      <div class="tweet-message">
+        <p name="text-output" class="text-output" for="tweet-text">${text}</p>
+      </div>
+      <footer class="tweet-content">
+        <div>
+          <time class="timeago">${newTime}</time>
+        </div>
+        <div>
+          <i class="fas fa-flag"></i>
+          <i class="fas fa-retweet"></i>
+          <i class="fas fa-heart"></i>
+        </div>
+      </footer>
+    </article>
+    `);
+
+    return $tweet;
   }
-}
 
+  renderTweets(data);
 
-const createTweetElement = function(tweet) {
-  const { name, avatars, handle } = tweet.user;
-  const { text } = tweet.content;
-  const time = tweet.created_at;
-  const newTime = timeago.format(time);
-  console.log(newTime);
-  // const time = $(".time-ago").attr("datetime");
-  // $(".time-ago").text(newTime);
+});
 
-
-  const $tweet = $(` 
-  <article class='tweet'>
-    <header class="tweet-content">
-      <div>
-        <img src=${avatars}>
-        <p>${name}</p>
-      </div>
-      <div>
-        <p class='opacity'>${handle}</p>
-      </div>
-    </header>
-    <div class="tweet-message">
-      <p name="text-output" class="text-output" for="tweet-text">${text}</p>
-    </div>
-    <footer class="tweet-content">
-      <div>
-        <time class="timeago">${newTime}</time>
-      </div>
-      <div>
-        <i class="fas fa-flag"></i>
-        <i class="fas fa-retweet"></i>
-        <i class="fas fa-heart"></i>
-      </div>
-    </footer>
-  </article>
-  `);
-
-  return $tweet;
-}
-
-renderTweets(data);
 
     
     // const fetchPosts = () => {
