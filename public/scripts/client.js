@@ -3,9 +3,49 @@
  * jQuery is already loaded
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
+
+//get DOM ready
 $(document).ready(() => {
 
+  // handle form submittion, send error message if input requirement not met, otherwise post request(server creates tweet data: name, avartar, handle, and time) and call function to render
+  $('form').submit(function(event) {
+    event.preventDefault();
+    $('.validation').remove();
 
+    const $serialized = $(this).serialize();
+    const $text = $('#tweet-text').val().trim().length;
+    const $tweetValidation = $('.new-tweet');
+    const $validation = $(`<div class="validation">
+          <i class="fas fa-bomb"></i>
+          <p id="error-text"></p>
+          <i class="fas fa-bomb"></i>
+        </div>`);
+
+    let errorMessage = '';
+
+    if ($text < 1) {
+      errorMessage = "Please write what you are humming about!!";
+    } else if ($text > 140) {
+      errorMessage = "maximum number of text is 140!!";
+    }
+    
+    if (errorMessage) {
+      $tweetValidation.prepend($validation);
+      $(".validation p").text(errorMessage);
+      return;
+    }
+
+    $.post("/tweets", $serialized)
+      .then((response) => {
+        renderTweets(response);
+        $('textarea').val('');
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  });
+
+// fetch data from JSON and call function to rendor tweet data
   const loadTweets = function() {
     $.ajax({
       url: "/tweets",
@@ -18,60 +58,20 @@ $(document).ready(() => {
     .catch((error) => {
       console.error(error);
     })
-  }
+  };
   loadTweets();
 
 
-  $('form').submit(function(event) {
-    event.preventDefault();
-    const $serialized = $(this).serialize();
-    const $text = $('#tweet-text').val().trim();
-    const $tweetValidation = $('.new-tweet');
-    const $validation = $(`<div class="validation">
-          <i class="fas fa-bomb"></i>
-          <p id="error-text"></p>
-          <i class="fas fa-bomb"></i>
-        </div>`);
-    let errorMessage = '';
-
-    if ($text.length < 1 ) {
-      errorMessage = "Please write what you are humming about!!";
-    } else if ($text.length > 140) {
-      errorMessage = "maximum number of text is 140!!";
-    }
-    
-    if (errorMessage) {
-      $('.validation').remove();
-      $tweetValidation.prepend($validation);
-      $(".validation p").text(errorMessage);
-      return;
-    }
-
-    $('.validation').remove();
-
-    $.post("/tweets", $serialized)
-      .then(() => {
-        loadTweets();
-        $('textarea').val('');
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  });
-
-
+// loop through data and render each in HTML format 
   const renderTweets = function(tweets) {
-    const $tweets = $('#tweets-container');
-    $tweets.empty();
-    
     for (const tweet of tweets) {
       const $tweet = createTweetElement(tweet);
       $('#tweets-container').prepend($tweet);
     }
-  }
+  };
 
 
-
+// prevent XSS
   const escape = function (str) {
     let div = document.createElement("div");
     div.appendChild(document.createTextNode(str));
@@ -79,7 +79,7 @@ $(document).ready(() => {
   };
 
 
-  
+// create HTML elements with data
   const createTweetElement = function(tweet) {
     const { name, avatars, handle } = tweet.user;
     const { text } = tweet.content;
@@ -112,5 +112,5 @@ $(document).ready(() => {
     </article>
     `);
     return $tweet;
-  }
+  };
 });
