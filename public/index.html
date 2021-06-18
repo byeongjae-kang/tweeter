@@ -21,11 +21,11 @@
     <!-- Top nav bar (fixed) -->
     <nav>
       <span>tweeter</span>
-      <p>
-        <strong>Write</strong> a new tweet
-        <br>
-        <i id="fas fa-angle-double-down"></i>
-      </p> 
+        <p>
+          <strong>Write</strong> a new tweet
+          <br>
+          <i class="fas fa-angle-double-down"></i>
+        </p> 
     </nav>
     <!-- header username profile img -->
     <header>
@@ -40,7 +40,6 @@
     <!-- Page-specific (main) content here -->
     <main class="container">
       <section class="new-tweet">
-        <h2>Compose Tweet</h2>
         <!-- form to submit tweet -->
         <form action="/tweets" method='POST'>
           <label for="tweet-text">What are you humming about?</label>
@@ -51,6 +50,7 @@
           </div>
         </form>
       </section>
+      <!-- new containers for tweets -->
       <section id='tweets-container'>    
       </section>
     </main>
