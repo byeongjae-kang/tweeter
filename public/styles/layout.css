@@ -26,8 +26,7 @@ body {
 main {
   width: 90%;
   margin: auto;
-  background-color: inherit;
-  font-size: 30pt;
+  font-size: 1.5em;
 }
 
 /*
