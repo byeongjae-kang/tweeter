@@ -12,15 +12,13 @@ html {
 img {
   object-fit: contain;
 }
-/*
- * Global layout stuff
- */
 
 body {
   color: #545149;
-  background-color: #f4f1ec;
+  background-color: #CB9173;
   font-family: 'Source Sans Pro', sans-serif;
   font-size: 24px;
+  font-weight: bold;
 }
 
 main {
@@ -29,6 +27,10 @@ main {
   font-size: 1.5em;
 }
 
-/*
- * Additional CSS can be defined below or in other CSS files, as per instructions
- */
+@media only screen and (min-width: 1024px) {
+  main {
+    width: 45%;
+    float: right;
+    margin: 4em 3em 3em 3em;
+  }
+}
